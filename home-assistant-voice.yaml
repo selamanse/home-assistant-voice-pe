@@ -171,7 +171,6 @@ switch:
             - switch.template.publish:
                 id: master_mute_switch
                 state: ON
-      - voice_assistant.stop:
     turn_off_action:
       - if:
           condition:
@@ -180,7 +179,6 @@ switch:
             - switch.template.publish:
                 id: master_mute_switch
                 state: OFF
-      - voice_assistant.start_continuous:
     on_turn_on:
       - script.execute: control_leds
     on_turn_off:
@@ -1549,6 +1547,14 @@ audio_dac:
 micro_wake_word:
   id: mww
   models:
+    - model: https://github.com/selamanse/microWakeWord/releases/download/yoh_steve_20250517.1/yoh_steve.json
+      id: yoh_steve
+    - model: https://github.com/kahrendt/microWakeWord/releases/download/okay_nabu_20241226.3/okay_nabu.json
+      id: okay_nabu
+    - model: hey_jarvis
+      id: hey_jarvis
+    - model: hey_mycroft
+      id: hey_mycroft
     - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
       id: stop
       internal: true
@@ -1599,15 +1605,14 @@ voice_assistant:
   id: va
   microphone: asr_mic
   media_player: external_media_player
-  # micro_wake_word: mww
-  use_wake_word: true
+  micro_wake_word: mww
+  use_wake_word: false
   noise_suppression_level: 0
   auto_gain: 0 dbfs
   volume_multiplier: 1
   on_client_connected:
     - lambda: id(init_in_progress) = false;
     - micro_wake_word.start:
-    - voice_assistant.start_continuous:
     - lambda: id(voice_assistant_phase) = ${voice_assist_idle_phase_id};
     - script.execute: control_leds
   on_client_disconnected:
