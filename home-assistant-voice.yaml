@@ -11,7 +11,7 @@ substitutions:
   # The voice assistant is replying to the command
   voice_assist_replying_phase_id: '5'
   # The voice assistant is not ready
-  voice_assist_not_ready_phase_id: '10'
+  voice_assist_not_ready_phase_id: '11'
   # The voice assistant encountered an error
   voice_assist_error_phase_id: '11'
   # Change this to true in case you ahve a hidden SSID at home.
